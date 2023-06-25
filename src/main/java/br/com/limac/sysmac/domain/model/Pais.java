@@ -12,8 +12,8 @@ import java.time.OffsetDateTime;
 @Table(name = "TB_PAIS")
 @SequenceGenerator(name = "pais_seq", sequenceName = "pais_seq", initialValue = 1, allocationSize = 1)
 public class Pais {
-    @EqualsAndHashCode.Include
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pais_seq")
     private Long id;
 

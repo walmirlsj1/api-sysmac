@@ -2,7 +2,6 @@ package br.com.limac.sysmac.domain.model;
 
 
 import br.com.limac.sysmac.domain.model.enums.EEquipamentoTipo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,11 +13,12 @@ import java.time.OffsetDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
 @Table(name = "TB_EQUIPAMENTO")
-@SequenceGenerator(name = "cliente_seq", sequenceName = "cliente_seq", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "equipamento_seq", sequenceName = "equipamento_seq", initialValue = 1, allocationSize = 1)
 public class Equipamento {
-    @EqualsAndHashCode.Include
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chamado_seq")
+    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "equipamento_seq")
     private Long id;
 
     @ManyToOne
@@ -37,7 +37,6 @@ public class Equipamento {
 
     private String responsavel;
 
-    @JsonIgnoreProperties("Equipamento")
     @ManyToOne
     @JoinColumn(name = "modelo_id", nullable = false)
     private Modelo modelo;

@@ -12,8 +12,8 @@ import java.time.OffsetDateTime;
 @Table(name = "TB_PRODUTO")
 @SequenceGenerator(name = "produto_seq", sequenceName = "produto_seq", initialValue = 1, allocationSize = 1)
 public class Produto {
-    @EqualsAndHashCode.Include
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_seq")
     private Long id;
 

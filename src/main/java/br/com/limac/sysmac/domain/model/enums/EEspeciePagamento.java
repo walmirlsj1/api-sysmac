@@ -1,5 +1,5 @@
 package br.com.limac.sysmac.domain.model.enums;
 
-public enum ETipoPagamento {
+public enum EEspeciePagamento {
     DINHEIRO, CHEQUE, CARTAO_CREDITO, CARTAO_DEBITO, PIX, OUTROS
 }

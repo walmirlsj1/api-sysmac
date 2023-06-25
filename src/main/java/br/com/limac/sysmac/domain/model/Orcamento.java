@@ -14,8 +14,8 @@ import java.time.OffsetDateTime;
 @Table(name = "TB_ORCAMENTO")
 @SequenceGenerator(name = "orcamento_seq", sequenceName = "orcamento_seq", initialValue = 1, allocationSize = 1)
 public class Orcamento {
-    @EqualsAndHashCode.Include
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orcamento_seq")
     private Long id;
 

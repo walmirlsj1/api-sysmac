@@ -8,25 +8,47 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
-@Table(name = "TB_CONTA_RECEBER")
-@SequenceGenerator(name = "conta_receber_seq", sequenceName = "conta_receber_seq", initialValue = 1, allocationSize = 1)
-public class ContaReceber {
+@Table(name = "TB_DUPLICATA")
+@SequenceGenerator(name = "duplicata_seq", sequenceName = "duplicata_seq", initialValue = 1, allocationSize = 1)
+public class Duplicata {
 
-    @EqualsAndHashCode.Include
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "conta_receber_seq")
+    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "duplicata_seq")
     private Long id;
 
     @Enumerated(EnumType.STRING)
     private EFormaPagamento formaPagamento;
 
+    private Long qtdParcela;
+
     @NotNull
-    private Double valorTotal;
+    private BigDecimal valorTotalAReceber;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chamado_id")
+    private Chamado chamado;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manutencao_id")
+    private Manutencao manutencao;
+
+//    @ManyToOne
+//    @JoinColumn(name = "conta_id", nullable = false)
+//    private Conta conta;
+//    @ManyToOne
+//    @JoinColumn(name = "conta_receber_parent_id")
+//    private ContaReceber contaReceber;
+
+    @ManyToOne
+    @JoinColumn(name = "plano_conta_id", nullable = false)
+    private PlanoConta planoConta;
 
     @ManyToOne
     @JoinColumn(name = "created_by", nullable = false)
@@ -37,19 +59,12 @@ public class ContaReceber {
     @JoinColumn(name = "updated_by", nullable = false)
     @JsonIgnore
     private User updatedBy;
-
-//    @OneToMany(mappedBy = "contaReceber")
     /**
      * mappedBy significa que este lado do relacionamento não tem um forengkey de parcela,
      * e também faz referencia a variavel utilizada na classe ContaReceberParcela.
      */
+//    @OneToMany(mappedBy = "contaReceber";
 //    private List<Titulo> parcelas;
-
-    @OneToOne(mappedBy = "contaReceber")
-    private Manutencao manutencao;
-
-    @OneToOne(mappedBy = "contaReceber")
-    private Chamado chamado;
 
 
     @Column(nullable = false, updatable = false)

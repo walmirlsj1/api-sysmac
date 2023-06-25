@@ -13,8 +13,8 @@ import java.time.OffsetDateTime;
 @Table(name = "TB_CONTATO")
 @SequenceGenerator(name = "contato_seq", sequenceName = "contato_seq", initialValue = 1, allocationSize = 1)
 public class Contato {
-    @EqualsAndHashCode.Include
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contato_seq")
     private Long id;
 

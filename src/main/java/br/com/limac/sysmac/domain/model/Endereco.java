@@ -14,8 +14,8 @@ import java.time.OffsetDateTime;
 @SequenceGenerator(name = "endereco_seq", sequenceName = "endereco_seq", initialValue = 1, allocationSize = 1)
 public class Endereco {
 
-    @EqualsAndHashCode.Include
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "endereco_seq")
     private Long id;
 

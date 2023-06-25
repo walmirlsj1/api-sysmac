@@ -4,10 +4,14 @@ package br.com.limac.sysmac.domain.model;
 import br.com.limac.sysmac.domain.model.enums.EChamadoStatus;
 import br.com.limac.sysmac.domain.model.enums.EStatusNota;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
@@ -16,8 +20,8 @@ import java.time.OffsetDateTime;
 @SequenceGenerator(name = "chamado_seq", sequenceName = "chamado_seq", initialValue = 1, allocationSize = 1)
 public class Chamado {
 
-    @EqualsAndHashCode.Include
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chamado_seq")
     private Long id;
 
@@ -25,8 +29,9 @@ public class Chamado {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
-    @OneToOne
-    private ContaReceber contaReceber;
+    @OneToMany
+    @JoinColumn(name = "conta_receber_id")
+    private Set<Duplicata> duplicata = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_chamado")
@@ -45,8 +50,14 @@ public class Chamado {
     @Column(name = "solicitante")
     private String solicitante;
 
-    @Column(name = "valor")
-    private Double valor;
+    @NotNull
+    @Column(name = "valor_bruto_servico")
+    private BigDecimal valorBrutoServico;
+
+    private BigDecimal desconto;
+
+    @NotNull
+    private BigDecimal valorAReceber;
 
     @Column(nullable = false, updatable = false)
     private OffsetDateTime dataCriacao;

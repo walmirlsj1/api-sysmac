@@ -13,8 +13,8 @@ import java.time.OffsetDateTime;
 @Table(name = "TB_ESTADO")
 @SequenceGenerator(name = "estado_seq", sequenceName = "estado_seq", initialValue = 1, allocationSize = 1)
 public class Estado {
-    @EqualsAndHashCode.Include
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estado_seq")
     private Long id;
 
